@@ -1,10 +1,60 @@
 import React from 'react'
+import qs from 'query-string'
 
-export const CategoryBox = ({ label, icon: Icon, description }) => {
+import { useNavigate, useSearchParams } from 'react-router-dom'
+const CategoryBox = ({ label, icon: Icon, selected }) => {
+    const [params, setParams] = useSearchParams()
+    // const value = params.get('category')
+    const navigate = useNavigate()
+    const handleClick = () => {
+        let currentQuery = {}
+
+        //getting the current query like home page url
+        if (params) {
+            currentQuery = qs.parse(params.toString())
+
+        }
+
+        //update the query
+        const updateQuery = {
+            ...currentQuery,
+            category: label
+        }
+
+        const url = qs.stringifyUrl({
+            url: "/",
+            query: updateQuery
+        },
+            {
+                skipNull: true
+            })
+        navigate(url)
+    }
+
     return (
-        <div className='flex flex-col items-center justify-center gap-2 border-b-2 hover:text-black border-transparent text-neutral-500 p-3'>
+        <div
+            onClick={handleClick}
+            className={`flex 
+            flex-col 
+            items-center 
+            justify-center 
+            gap-2
+            p-3
+            border-b-2
+            hover:text-neutral-800
+            transition
+            cursor-pointer
+            ${selected
+                    ? 'border-b-neutral-800 text-neutral-800'
+                    : 'border-transparent text-neutral-500'
+                }
+         
+          `}
+        >
             <Icon size={26} />
-            <p className='text-sm font-medium'>{label}</p>
+            <div className='text-sm font-medium'>{label}</div>
         </div>
     )
 }
+
+export default CategoryBox

@@ -1,7 +1,7 @@
 import React from 'react'
 import Container from '../Shared/Container'
 import { categories } from './categoriesData'
-import { CategoryBox } from './CategoryBox'
+import CategoryBox from './CategoryBox'
 export const Categories = () => {
     return (
         <Container>
