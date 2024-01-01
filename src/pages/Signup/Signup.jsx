@@ -29,7 +29,7 @@ const Signup = () => {
         const formData = new FormData()
         formData.append('image', image)
 
-        const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY
+        const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_KEY
             }`
         fetch(url, {
             method: 'POST',
@@ -64,7 +64,7 @@ const Signup = () => {
                 toast.error(err.message)
             })
 
-        return
+        // return
     }
 
     // Handle google signin
